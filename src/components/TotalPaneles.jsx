@@ -1,4 +1,48 @@
-function TotalPaneles() {
+import React, { Component } from 'react';
+
+class TotalPaneles extends Component {
+    
+    constructor(props){
+        super(props);
+        this.state = {
+            listaProductos: [],
+            listaUsuarios: [],
+            listaCategorias: []
+        }
+    }
+
+    componentDidMount(){
+        //primera api (productos)
+        fetch('http://localhost:3000/api/products')
+            .then(response => {
+                return response.json();
+            })
+            .then(productos => {
+                this.setState({listaProductos: productos.data})
+            })
+            .catch(error => console.log(error));
+        
+        //segunda api (usuarios)
+        fetch('http://localhost:3000/api/users')
+            .then(respons => {
+                return respons.json();
+            })
+            .then(usuarios => {
+                this.setState({listaUsuarios: usuarios.data})
+            } )
+            .catch(error => console.log(error));
+
+        //tercera api (categorias)
+        fetch('http://localhost:3000/api/categories')
+            .then(respuesta => {
+                return respuesta.json();
+            })
+            .then(categorias => {
+                this.setState({listaCategorias: categorias.data})
+            })
+    }
+
+    render(){
     return (
         <div className="row">
             {/* Movies in Data Base */}
@@ -11,7 +55,7 @@ function TotalPaneles() {
                                     Total Productos
                                 </div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                    21
+                                    {this.state.listaProductos.length}
                                 </div>
                             </div>
                             <div className="col-auto">
@@ -28,11 +72,11 @@ function TotalPaneles() {
                         <div className="row no-gutters align-items-center">
                             <div className="col mr-2">
                                 <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    {" "}
+                                    
                                     Total Categorías
                                 </div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                    79
+                                {this.state.listaCategorias.length}
                                 </div>
                             </div>
                             <div className="col-auto">
@@ -52,7 +96,7 @@ function TotalPaneles() {
                                     Total Usuarios
                                 </div>
                                 <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                    49
+                                {this.state.listaUsuarios.length}
                                 </div>
                             </div>
                             <div className="col-auto">
@@ -64,6 +108,7 @@ function TotalPaneles() {
             </div>
         </div>
     );
+}
 }
 
 export default TotalPaneles;
