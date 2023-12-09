@@ -1,6 +1,7 @@
 import UltimoCreadoDetalle from "./UltimoCreadoDetalle";
 import TotalPaneles from "./TotalPaneles";
 import CategoriasPanel from "./CategoriasPanel";
+import PanelListadoProductos from "./PanelListadoProductos";
 
 function Contenedor() {
     return (
@@ -134,6 +135,9 @@ function Contenedor() {
                         {/*End Content Row Top*/}
                     </div>
                     {/* End of MainContent */}
+                    {/*tabla de productos*/}
+                    <PanelListadoProductos />
+                    {/*fin tabla de productos*/}
                     {/* Footer */}
                     <footer className="sticky-footer bg-white">
                         <div className="container my-auto">
